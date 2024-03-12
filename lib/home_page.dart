@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_examples/category_model.dart';
 
-import 'package:flutter_examples/product_modal.dart';
 import 'package:flutter_examples/product_page.dart';
 import 'package:flutter_examples/shopping.dart';
 
@@ -13,12 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    final List<String> entries = <String>['A', 'B', 'C'];
-  final List<String> category = <String>[
-    'Balık',
-    'Et',
-    'Tavuk Eti',
-  ];
   final List<CategoryModel> categoryList = [
     CategoryModel(
         image: "assets/images/tumtavuk.jpeg", text: 'Tavuk Eti Çeşitleri'),
@@ -28,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         image: "assets/images/tavuk3.jpeg", text: 'Tavuk Eti Çeşitleri'),
     CategoryModel(
         image: "assets/images/pirzolatavuk.jpeg", text: 'Tavuk Eti Çeşitleri'),
-   CategoryModel(image: "assets/images/but.jpeg", text: 'Tavuk Eti Çeşitleri'),
+    CategoryModel(image: "assets/images/but.jpeg", text: 'Tavuk Eti Çeşitleri'),
     CategoryModel(
         image: "assets/images/kalca.jpeg", text: 'Tavuk Eti Çeşitleri'),
     CategoryModel(
@@ -97,15 +91,28 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              //Banner widget
               width: double.infinity,
-              height: 300,
+              height: 275,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black54),
-                image: const DecorationImage(
-                    image: NetworkImage(
-                        "https://www.sorhocam.com/uploads/images/1292016-145108-60171.jpg")),
+                color: Colors.amber,
                 borderRadius: BorderRadius.circular(20.0),
+                border: Border.all(color: Colors.black54),
               ),
+              child: Image.network(
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 275,
+                  "https://www.sorhocam.com/uploads/images/1292016-145108-60171.jpg"),
+              // decoration: BoxDecoration(
+              //   color: Colors.amber,
+              //   border: Border.all(color: Colors.black54),
+              //   image: const DecorationImage(
+              //     fit: BoxFit.cover,
+              //       image: NetworkImage(
+              //           "https://www.sorhocam.com/uploads/images/1292016-145108-60171.jpg")),
+              //   borderRadius: BorderRadius.circular(20.0),
+              // ),
             ),
             const Padding(
               padding: EdgeInsets.all(15.0),
@@ -117,6 +124,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SingleChildScrollView(
+              //kategoriler satırı bu satırda kategorilerin resimleri getirirlir
               scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: EdgeInsets.all(5.0),
@@ -198,7 +206,7 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: Container(
                 width: 400,
-                height: 300,
+                height: 250,
                 color: Colors.white30,
                 //Ürünler Listesi Widgetı
                 child: ListView.builder(
@@ -208,46 +216,24 @@ class _HomePageState extends State<HomePage> {
                       //listenin indexine erişip elemanları görebilmemiz için şart
                       //containerı sileriz radiusa değer verip resmin boyutunu büyültmek için
                       return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 227, 185, 185),
-                        ),
-                        padding: EdgeInsets.all(4.0), //içten verilen boşluk
-                        margin: EdgeInsets.all(10.0), //dıştan verilen boşluk
+                        margin:
+                            const EdgeInsets.all(10.0), //dıştan verilen boşluk
                         height: 100,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ), //
-                            CircleAvatar(
-                              radius: 35.0,
-                              backgroundImage: AssetImage(
-                                categoryList[index].image,
-                              ),
-                              backgroundColor: Colors.transparent,
-                            ),
-
-                            // Image.asset(
-
-                            //     productList[index].image,
-                            //   width: 95,
-                            //   height: 95,
-                            //   fit: BoxFit.cover
-                            // ), //Boxfit.cover resimleri eşitlemek için kullanılır.
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 70, 5, 5),
-                              ),
-                              categoryList[index].text,
-                            ),
-                          ],
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(categoryList[index].image),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(15),
+                          color: const Color.fromARGB(255, 252, 224, 224),
+                        ),
+                        child: Center(
+                          child: Text(
+                            categoryList[index].text,
+                            style: const TextStyle(
+                                fontSize: 30,
+                                color: Color.fromARGB(255, 63, 3, 3),
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       );
                     }),
@@ -280,3 +266,66 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+ // width: double.infinity,
+              // height: 300, 
+              // decoration: BoxDecoration(
+              //   color: Colors.amber,
+              //   border: Border.all(color: Colors.black54),
+              //   image: const DecorationImage(
+              //       image: NetworkImage(
+              //           "https://www.sorhocam.com/uploads/images/1292016-145108-60171.jpg")),
+              //   borderRadius: BorderRadius.circular(20.0),
+              // ),
+
+
+                 // //containerın gözükmesi için her zaman bir genişliği ve yüksekliği olmalıdır.
+              // width: double.infinity,
+              // height: 300,
+              // color: Colors.amber,
+              // child: Image.network(
+              //     "https://www.sorhocam.com/uploads/images/1292016-145108-60171.jpg"),
+
+
+
+                //decoration: BoxDecoration(
+                        //image: const DecorationImage(image: AssetImage("assets/images/tumtavuk.jpeg"),fit: BoxFit.cover),
+                        //borderRadius: BorderRadius.circular(15.0),
+
+                        //  color: const Color.fromARGB(255, 227, 185, 185),
+                        // padding:
+                        //     const EdgeInsets.all(4.0), //içten verilen boşluk
+                       //margini buraya ekle
+                        // child: Row(
+                        //   mainAxisAlignment: MainAxisAlignment.start,
+                        //   children: [
+                        //     const SizedBox(
+                        //       width: 10,
+                        //     ), //
+                        //     CircleAvatar(
+                        //       radius: 35.0,
+                        //       backgroundImage: AssetImage(
+                        //         categoryList[index].image,
+                        //       ),
+                        //       backgroundColor: Colors.transparent,
+                        //     ),
+
+                        //     // Image.asset(
+
+                        //     //     productList[index].image,
+                        //     //   width: 95,
+                        //     //   height: 95,
+                        //     //   fit: BoxFit.cover
+                        //     // ), //Boxfit.cover resimleri eşitlemek için kullanılır.
+                        //     const SizedBox(
+                        //       width: 15,
+                        //     ),
+                        //     Text(
+                        //       style: const TextStyle(
+                        //         fontSize: 20,
+                        //         fontWeight: FontWeight.bold,
+                        //         color: Color.fromARGB(255, 70, 5, 5),
+                        //       ),
+                        //       categoryList[index].text,
+                        //     ),
+                        //   ],
+                        // ),
